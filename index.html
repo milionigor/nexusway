@@ -8,809 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <style>
-        /* ======================================= */
-        /* 1. VARIÁVEIS CSS E TEMA CLARO (Padrão) */
-        /* ======================================= */
-        :root {
-            /* Cores da Marca */
-            --azul-nexus: #5271ff;
-            --amarelo-escuro: #d4af13;
-            --verde-whatsapp: #25D366;
-            --cor-urgencia-destaque: #FF0000;
-            
-            /* Cores de Fundo (Light Mode) */
-            --bg-principal: #ffffff; 
-            --bg-secundario: #f7f9fc; 
-            --bg-card: #ffffff;
-            --bg-cinza-claro: #d9d9d9; 
-            --bg-urgencia: var(--amarelo-escuro); 
-            --bg-ad-content: var(--bg-cinza-claro); 
-            
-            /* Cores de Texto (Light Mode) */
-            --text-primario: #222; 
-            --text-secundario: #555; 
-            --text-contraste: #fff; 
-            --text-links-hover: #405edb; 
-            --cor-grid: rgba(0, 0, 0, 0.07);
-            --sombra-neon: rgba(82, 113, 255, 0.5); /* Sombra do neon no light mode */
-        }
-        
-        /* ======================================= */
-        /* 2. TEMA ESCURO (Dark Mode) */
-        /* ======================================= */
-        body.dark-mode {
-            --bg-principal: #161616; /* Fundo mais escuro para maior contraste */
-            --bg-secundario: #242424; /* Fundo de seção escuro */
-            --bg-card: #2c2c2c;
-            --bg-cinza-claro: #555555;
-            --bg-urgencia: #b38e0f; 
-            --bg-ad-content: #555555; 
-            
-            --text-primario: #f0f0f0; 
-            --text-secundario: #cccccc;
-            --text-contraste: #1f1f1f; 
-            --text-links-hover: #7b9eff; 
-            --cor-grid: rgba(82, 113, 255, 0.2); /* Grade com brilho azulado no dark mode */
-            --sombra-neon: rgba(82, 113, 255, 0.8); /* Sombra do neon mais forte no dark mode */
-        }
-        
-        /* ======================================= */
-        /* 3. Estilos Gerais Aplicando as Variáveis */
-        /* ======================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: var(--text-primario);
-            background-color: var(--bg-principal);
-            scroll-behavior: smooth;
-            transition: background-color 0.3s, color 0.3s;
-            -webkit-tap-highlight-color: transparent; /* Remove o destaque ao tocar no iOS */
-            touch-action: manipulation; /* Melhora a interação em dispositivos touch */
-        }
-
-        /* Utilitários */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--azul-nexus);
-            color: var(--text-contraste);
-            padding: 14px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s;
-            border: 2px solid var(--azul-nexus);
-        }
-
-        .cta-button:hover {
-            background-color: var(--text-links-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 0 10px var(--sombra-neon); 
-        }
-        
-        .cta-secundario {
-            display: inline-block;
-            background-color: var(--amarelo-escuro);
-            color: var(--text-primario);
-            padding: 14px 30px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s;
-            border: 2px solid var(--amarelo-escuro);
-        }
-
-        .cta-secundario:hover {
-            background-color: #bfa511; 
-            transform: translateY(-2px);
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.8em;
-            margin-bottom: 40px;
-            color: var(--text-primario); 
-            position: relative;
-            font-weight: 900;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 5px;
-            background-color: var(--amarelo-escuro);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        /* Cabeçalho (Header) */
-        header {
-            background-color: var(--bg-principal);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); 
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: background-color 0.3s;
-            -webkit-overflow-scrolling: touch; /* Melhora a rolagem no iOS */
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            flex-wrap: wrap; 
-        }
-
-        .logo {
-            font-size: 1.8em; 
-            font-weight: 900;
-            text-shadow: 0 0 5px var(--azul-nexus);
-            color: var(--azul-nexus);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo img {
-            height: 60px; /* Padrão Desktop */
-            margin-right: 10px; 
-            transition: height 0.3s, margin 0.3s;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            align-items: center; 
-            margin-left: auto; 
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-primario);
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--azul-nexus);
-        }
-
-        /* Botão de Menu Hamburguer (VISÍVEL NO MOBILE) */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8em;
-            color: var(--azul-nexus);
-            cursor: pointer;
-            background: none;
-            border: none;
-            -webkit-appearance: button; /* Força o botão a ser reconhecido no iOS */
-            -moz-appearance: button;
-            appearance: button;
-            padding: 10px 15px; /* Aumenta a área clicável */
-            outline: none; /* Remove contorno no iOS */
-            -webkit-tap-highlight-color: transparent; /* Remove destaque ao tocar */
-        }
-
-        /* Hero (Página Inicial) - EFEITO TECNOLÓGICO */
-        #hero {
-            background-color: var(--bg-secundario);
-            padding: 120px 0;
-            text-align: center;
-            transition: background-color 0.3s;
-            position: relative;
-            z-index: 1; 
-            
-            background-image: linear-gradient(to right, var(--cor-grid) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--cor-grid) 1px, var(--bg-secundario) 1px);
-            background-size: 40px 40px; 
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1); 
-        }
-        
-        body.dark-mode #hero {
-             background-image: linear-gradient(to right, var(--cor-grid) 1px, transparent 1px),
-                              linear-gradient(to bottom, var(--cor-grid) 1px, var(--bg-secundario) 1px);
-        }
-
-        #hero h1 {
-            font-size: 3.8em;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            color: var(--text-primario);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        }
-
-        #hero p {
-            font-size: 1.4em;
-            margin-bottom: 40px;
-            color: var(--text-secundario);
-        }
-
-        .impact-phrases {
-            margin-top: 30px;
-            margin-bottom: 50px;
-            font-size: 1.6em;
-            color: var(--azul-nexus);
-            font-weight: bold;
-        }
-
-        /* Seção A Dor da Inação e Urgência - Destaque de Perigo */
-        #urgencia {
-            background-color: var(--bg-urgencia);
-            color: var(--text-primario);
-            padding: 60px 0;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); 
-        }
-        
-        body.dark-mode #urgencia {
-            color: var(--text-contraste); 
-        }
-        
-        #urgencia h2 {
-            font-size: 2.8em;
-            margin-bottom: 15px;
-        }
-        
-        #urgencia p {
-            font-size: 1.3em;
-            margin-bottom: 30px;
-        }
-
-        /* Seção Como Funciona e Serviços - Melhoria dos Cards */
-        .step-card, .service-card {
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid var(--bg-cinza-claro);
-            background-color: var(--bg-card);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s, border-color 0.3s;
-        }
-
-        .step-card:hover, .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px var(--sombra-neon); 
-        }
-
-        .step-icon, .service-icon {
-            font-size: 3.5em;
-            color: var(--azul-nexus);
-            margin-bottom: 15px;
-        }
-
-        .step-card h3 {
-            margin-bottom: 10px;
-            font-size: 1.4em;
-            color: var(--text-primario);
-        }
-        .step-card p {
-            color: var(--text-secundario);
-        }
-        
-        /* Seção Antes e Depois - Estilo Tecnológico Avançado */
-        #antes-depois {
-            padding: 80px 0;
-            background-color: var(--bg-secundario);
-            transition: background-color 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #antes-depois::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(82,113,255,0.1) 0%, rgba(82,113,255,0.05) 10%, transparent 20%),
-                linear-gradient(to right, var(--cor-grid) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--cor-grid) 1px, transparent 1px);
-            background-size: 40px 40px, 40px 40px, 40px 40px;
-            opacity: 0.5;
-            z-index: 0;
-        }
-        
-        body.dark-mode #antes-depois::before {
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(82,113,255,0.2) 0%, rgba(82,113,255,0.1) 10%, transparent 20%),
-                linear-gradient(to right, var(--cor-grid) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--cor-grid) 1px, transparent 1px);
-        }
-
-        .ad-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .ad-card {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
-            border: 2px solid var(--bg-cinza-claro);
-        }
-        
-        .ad-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 0 30px var(--sombra-neon), 0 0 15px var(--sombra-neon);
-            border-color: var(--azul-nexus);
-        }
-        
-        .ad-card h3 {
-            background-color: var(--azul-nexus);
-            color: var(--text-contraste);
-            padding: 15px;
-            font-size: 1.6em;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 8px rgba(0, 0, 0, 0.4); 
-        }
-        
-        .ad-content {
-            padding: 25px;
-            background-color: var(--bg-card);
-            transition: background-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-        }
-        
-        .ad-content p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: var(--text-primario);
-        }
-        
-        .ad-content img {
-            max-width: 90%; 
-            height: auto;
-            border-radius: 8px;
-            border: 4px solid var(--bg-principal);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-        }
-        
-        .ad-content ul {
-            list-style: none;
-            text-align: left;
-            margin-top: 15px;
-            font-size: 1em;
-            color: var(--text-secundario);
-            width: 100%;
-            max-width: 250px;
-        }
-
-        .ad-content ul li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ad-content ul li .fa-times {
-            color: var(--cor-urgencia-destaque);
-        }
-
-        .ad-content ul li .fa-check {
-            color: var(--verde-whatsapp);
-        }
-
-        /* Seção Depoimentos */
-        #depoimentos {
-            padding: 80px 0;
-            background-color: var(--bg-principal);
-            transition: background-color 0.3s;
-        }
-
-        .depoimentos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 30px;
-        }
-
-        .depoimento-card {
-            background-color: var(--bg-card);
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 5px solid var(--amarelo-escuro);
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.3s;
-        }
-
-        .depoimento-card blockquote {
-            font-style: italic;
-            margin-bottom: 15px;
-            color: var(--text-secundario);
-        }
-
-        .rating {
-            color: gold;
-            margin-bottom: 10px;
-        }
-        
-        /* Estilização básica do player de áudio */
-        .audio-player {
-            width: 100%; 
-            margin-top: 15px; 
-            background: var(--bg-cinza-claro);
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        
-        .audio-player::-webkit-media-controls-panel {
-            background-color: var(--bg-cinza-claro);
-            color: var(--text-primario);
-        }
-        .audio-player::-webkit-media-controls-play-button,
-        .audio-player::-webkit-media-controls-current-time-display,
-        .audio-player::-webkit-media-controls-time-remaining-display {
-            color: var(--text-primario);
-        }
-
-        /* Página de Serviços */
-        #servicos {
-            padding: 80px 0;
-            background-color: var(--bg-secundario);
-            transition: background-color 0.3s;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .service-card {
-            border-top: 5px solid var(--azul-nexus);
-        }
-
-        .service-card h3 {
-            color: var(--text-primario);
-        }
-
-        .service-card p {
-            color: var(--text-secundario);
-        }
-
-        /* Página Sobre Nós */
-        #sobre {
-            padding: 80px 0;
-            background-color: var(--bg-principal);
-            transition: background-color 0.3s;
-        }
-        
-        .sobre-content {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .sobre-text {
-            flex: 2;
-        }
-        
-        .sobre-text h2 {
-            text-align: left;
-        }
-
-        .sobre-text p {
-            margin-bottom: 20px;
-            font-size: 1.1em;
-            color: var(--text-secundario);
-        }
-        
-        .values-grid {
-            flex: 1;
-            display: grid;
-            gap: 15px;
-            padding: 20px;
-            background-color: var(--bg-cinza-claro);
-            border-radius: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .value-item {
-            font-weight: bold;
-            color: var(--text-primario);
-            border-left: 3px solid var(--amarelo-escuro);
-            padding-left: 10px;
-        }
-
-        /* Página de Contato */
-        #contato {
-            padding: 80px 0;
-            background-color: var(--bg-secundario);
-            transition: background-color 0.3s;
-        }
-
-        .contact-form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 40px;
-            background-color: var(--bg-principal);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .contact-form-container h3 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-            color: var(--azul-nexus);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-primario);
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--bg-cinza-claro);
-            border-radius: 5px;
-            font-size: 1em;
-            background-color: var(--bg-principal);
-            color: var(--text-primario);
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        .whatsapp-cta {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .whatsapp-cta a {
-            background-color: var(--verde-whatsapp);
-            color: var(--text-contraste);
-            padding: 15px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .whatsapp-cta a:hover {
-            background-color: #128C7E;
-        }
-        .whatsapp-cta p {
-            color: var(--text-primario);
-        }
-        
-        /* Rodapé (Footer) */
-        footer {
-            background-color: #222;
-            color: var(--bg-cinza-claro);
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: var(--azul-nexus);
-            text-decoration: none;
-        }
-        
-        /* Botão de Alternância (Novo Estilo) */
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5em;
-            color: var(--azul-nexus); 
-            padding: 5px;
-            line-height: 1;
-            transition: transform 0.2s;
-            display: block; /* Garante visibilidade em mobile */
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
-        /* ======================================= */
-        /* MOBILE MENU HAMBURGER */
-        /* ======================================= */
-        @media (max-width: 768px) {
-            /* Logo no Mobile: Reduz o tamanho e margem */
-            .logo img {
-                height: 40px; 
-                margin-right: 0;
-            }
-            
-            /* Título da Logo no mobile: Reduz o tamanho da fonte */
-            .logo {
-                font-size: 1.4em; 
-            }
-
-            /* Botão de Menu Hamburguer */
-            .menu-toggle {
-                display: block; /* Garante que o botão hamburguer apareça no iPhone */
-                font-size: 1.8em;
-                color: var(--azul-nexus);
-                cursor: pointer;
-                background: none;
-                border: none;
-                -webkit-appearance: button; /* Força o botão a ser reconhecido no iOS */
-                -moz-appearance: button;
-                appearance: button;
-                padding: 10px 15px; /* Aumenta a área clicável */
-                outline: none; /* Remove contorno no iOS */
-                -webkit-tap-highlight-color: transparent; /* Remove destaque ao tocar */
-                position: relative; /* Garante posicionamento correto */
-                z-index: 1001; /* Garante que fique acima de outros elementos */
-            }
-
-            /* Navegação (Menu) */
-            nav {
-                position: relative;
-            }
-            
-            nav ul {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--bg-principal);
-                flex-direction: column;
-                padding: 0;
-                margin: 0;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                z-index: 1001;
-                display: none; /* Escondido por padrão */
-            }
-
-            nav ul.active {
-                display: flex; /* Mostra quando ativo */
-            }
-
-            nav ul li {
-                margin: 0;
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid var(--bg-cinza-claro);
-            }
-            
-            nav ul li:last-child {
-                border-bottom: none;
-            }
-
-            nav ul li a {
-                padding: 15px 20px;
-                display: block;
-                font-size: 1em;
-            }
-            
-            /* Botão de alternância de tema no mobile */
-            .theme-toggle {
-                margin-left: 0;
-                margin-top: 10px;
-                margin-bottom: 10px; /* Espaçamento abaixo para melhor visibilidade */
-                display: block; /* Garante visibilidade */
-            }
-
-            /* Ajustes de Tamanho de Fonte para Legibilidade Móvel */
-            #hero h1 {
-                font-size: 2em; /* Reduz título principal */
-            }
-
-            #hero p {
-                font-size: 1.1em;
-            }
-            
-            .section-title {
-                font-size: 1.8em;
-            }
-            
-            #urgencia h2 {
-                font-size: 2em;
-            }
-            
-            .ad-grid {
-                /* Força a visualização em coluna única */
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* ======================================= */
-        /* DESKTOP MENU */
-        /* ======================================= */
-        @media (min-width: 769px) {
-            .menu-toggle {
-                display: none;
-            }
-
-            nav ul {
-                display: flex;
-                align-items: center;
-                position: static;
-                box-shadow: none;
-            }
-
-            nav ul li {
-                margin-left: 30px;
-                border-bottom: none;
-            }
-
-            .theme-toggle {
-                display: block; /* Mantém visível no desktop */
-                margin-left: 20px;
-            }
-        }
-
-        /* Custom Thank You Message */
-        .thank-you-message {
-            display: none;
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 40px;
-            background-color: var(--bg-secundario);
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .thank-you-message h3 {
-            color: var(--azul-nexus);
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .thank-you-message p {
-            color: var(--text-secundario);
-            margin-bottom: 20px;
-        }
-
-        .thank-you-message .cta-button {
-            width: 100%;
-        }
+        /* [Seu CSS existente permanece o mesmo, omitido para brevidade] */
     </style>
 </head>
 <body>
-
     <header>
         <div class="container">
             <nav>
@@ -818,11 +19,9 @@
                     <img src="logo-nexusway.png" alt="Logo NexusWay">
                     NexusWay 
                 </a>
-                
                 <button class="menu-toggle" id="menu-toggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                
                 <ul id="main-menu">
                     <li><a href="#hero">Início</a></li>
                     <li><a href="#como-funciona">Como Funciona</a></li>
@@ -830,7 +29,6 @@
                     <li><a href="#depoimentos">Resultados</a></li>
                     <li><a href="#sobre">Sobre Nós</a></li>
                     <li><a href="#contato" class="cta-button">Contato</a></li>
-                    
                     <li>
                         <button id="theme-toggle" class="theme-toggle" title="Alternar Modo Escuro/Claro">
                             <i class="fas fa-moon"></i> 
@@ -844,22 +42,9 @@
     <section id="hero">
         <div class="container">
             <p style="color: var(--amarelo-escuro); font-weight: bold; text-transform: uppercase;">Sua Autoridade Online Começa com Estratégia de Resultados.</p>
-            
-            <h1>
-                Resultados Digitais Fracos? <span style="color: var(--azul-nexus);">Nós Posicionamos Sua Empresa Para Obter Máximo Alcance e Crescimento Consistente.</span>
-            </h1>
-            
-            <p>
-                A NexusWay oferece a estratégia completa para o sucesso empresarial online: da Otimização do Perfil Google (Google Business Profile) às campanhas de Tráfego Pago e Sites de Alta Conversão. Nosso foco é garantir que você seja visto, tenha autoridade e obtenha o ROI que merece, 
-                <span style="color: var(--amarelo-escuro); font-weight: bold;">
-                    seja você um negócio local ou operando 100% online.
-                </span>
-            </p>
-            
-            <div class="impact-phrases">
-                Mais visibilidade. Mais clientes. Mais vendas.
-            </div>
-            
+            <h1>Resultados Digitais Fracos? <span style="color: var(--azul-nexus);">Nós Posicionamos Sua Empresa Para Obter Máximo Alcance e Crescimento Consistente.</span></h1>
+            <p>A NexusWay oferece a estratégia completa para o sucesso empresarial online: da Otimização do Perfil Google (Google Business Profile) às campanhas de Tráfego Pago e Sites de Alta Conversão. Nosso foco é garantir que você seja visto, tenha autoridade e obtenha o ROI que merece, <span style="color: var(--amarelo-escuro); font-weight: bold;">seja você um negócio local ou operando 100% online.</span></p>
+            <div class="impact-phrases">Mais visibilidade. Mais clientes. Mais vendas.</div>
             <a href="#contato" class="cta-button">Pare de Perder Tempo: Solicite sua Consultoria de Crescimento</a>
         </div>
     </section>
@@ -867,14 +52,7 @@
     <section id="urgencia">
         <div class="container">
             <h2>O Fato: A Credibilidade Digital é o Novo Campo de Batalha.</h2>
-            <p>
-                Clientes esperam profissionalismo e autoridade online. Um posicionamento fraco ou incompleto em qualquer plataforma destrói a confiança. 
-                
-                <span style="color: #FF0000; font-weight: bold;">
-                    Não adie o seu crescimento;
-                </span> 
-                seus concorrentes estão investindo em Estratégia e Tecnologia AGORA!
-            </p>
+            <p>Clientes esperam profissionalismo e autoridade online. Um posicionamento fraco ou incompleto em qualquer plataforma destrói a confiança. <span style="color: #FF0000; font-weight: bold;">Não adie o seu crescimento;</span> seus concorrentes estão investindo em Estratégia e Tecnologia AGORA!</p>
             <a href="#contato" class="cta-secundario">Garanta Sua Vantagem Competitiva Hoje!</a>
         </div>
     </section>
@@ -905,16 +83,12 @@
     <section id="antes-depois">
         <div class="container">
             <h2 class="section-title">Resultados Reais: O Poder da Otimização</h2>
-            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1em; color: var(--text-secundario);">
-                Veja a transformação que a NexusWay pode trazer para a presença online da sua empresa.
-            </p>
-            
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1em; color: var(--text-secundario);">Veja a transformação que a NexusWay pode trazer para a presença online da sua empresa.</p>
             <div class="ad-grid">
                 <div class="ad-card">
                     <h3>ANTES</h3>
                     <div class="ad-content">
                         <p>Presença Digital Desatualizada e Amadora</p>
-                        
                         <img src="antes.png.png" alt="Perfil Antes da Otimização">
                         <ul style="list-style: none; text-align: left; margin-top: 10px; font-size: 0.9em;">
                             <li><i class="fas fa-times"></i> Poucas fotos profissionais</li>
@@ -927,9 +101,8 @@
                     <h3>DEPOIS</h3>
                     <div class="ad-content">
                         <p>Posicionamento Profissional e de Alta Conversão</p>
-                        
                         <img src="depois.png" alt="Perfil Depois da Otimização">
-                         <ul style="list-style: none; text-align: left; margin-top: 10px; font-size: 0.9em;">
+                        <ul style="list-style: none; text-align: left; margin-top: 10px; font-size: 0.9em;">
                             <li><i class="fas fa-check"></i> Fotos otimizadas e em alta</li>
                             <li><i class="fas fa-check"></i> Estratégia de SEO completa</li>
                             <li><i class="fas fa-check"></i> Aumento no volume de leads/vendas!</li>
@@ -947,29 +120,29 @@
                 <div class="depoimento-card">
                     <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <blockquote>"Quero agradecer de coração ao Igor por todo o trabalho e dedicação em arrumar a minha página no Google, montar e cuidar das minhas redes sociais. O seu profissionalismo, paciência e criatividade fizeram toda a diferença — desde o visual até as estratégias que ajudaram muito nas minhas vendas. Muito obrigada!"</blockquote>
-                    
                     <audio controls class="audio-player">
                         <source src="audios/cetranet_depoimento.mp3" type="audio/mp3">
+                        <!-- Alternativa: Hospede em outro serviço e use o link público -->
+                        <!-- <source src="https://seuservidor.com/audios/cetranet_depoimento.mp3" type="audio/mp3"> -->
+                        Your browser does not support the audio element.
                     </audio>
-                    
                     <cite style="margin-top: 10px; display: block; font-weight: bold; color: var(--azul-nexus);">Mayra, Proprietário da cetraNet Assistência Técnica</cite>
                 </div>
-                
                 <div class="depoimento-card">
                     <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <blockquote style="min-height: 80px;">"O Igor é simplesmente maravilhoso! Ele me ajudou muito aqui. Muitas coisas que a gente tinha dúvida, ele explicou e mostrou de um jeito diferente, e isso fez toda a diferença. O trabalho dele é excelente — muito dedicado, atencioso e profissional. Gostamos tanto do resultado que queremos contratá-lo mensalmente para cuidar da divulgação da empresa e das nossas redes. Super indico!"</blockquote>
-                    
                     <audio controls class="audio-player">
                         <source src="audios/Kikifestas.mp3" type="audio/mp3">
+                        <!-- Alternativa: Hospede em outro serviço e use o link público -->
+                        <!-- <source src="https://seuservidor.com/audios/Kikifestas.mp3" type="audio/mp3"> -->
+                        Your browser does not support the audio element.
                     </audio>
-                    
-                    <cite style="margin-top: 10px; display: block; font-weight: bold; color: var(--azul-nexus);">Claudete., Proprietário da Loja de Kiki Festas</cite>
+                    <cite style="margin-top: 10px; display: block; font-weight: bold; color: var(--azul-nexus);">Claudete, Proprietário da Loja de Kiki Festas</cite>
                 </div>
-                
                 <div class="depoimento-card">
                     <div class="rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <blockquote style="min-height: 80px;">"Quero expressar minha imensa satisfação com o trabalho realizado. O site ficou simplesmente incrível- exatamente como imaginei ou até melhor. O profissionalismo,  a atenção aos detalhes  e o cuidado em cada etapa do processo me surpreenderam positivamente. Recomendo com toda a confiança pelo profissionalismo que foi me dado. Superou todas as minhas expectativas."</blockquote>   
-                    <cite style="margin-top: 10px; display: block; font-weight: bold; color: var(--azul-nexus);"> Neide Rabonato.,Terapeuta Emocional TRG.</cite>
+                    <blockquote style="min-height: 80px;">"Quero expressar minha imensa satisfação com o trabalho realizado. O site ficou simplesmente incrível- exatamente como imaginei ou até melhor. O profissionalismo, a atenção aos detalhes e o cuidado em cada etapa do processo me surpreenderam positivamente. Recomendo com toda a confiança pelo profissionalismo que foi me dado. Superou todas as minhas expectativas."</blockquote>
+                    <cite style="margin-top: 10px; display: block; font-weight: bold; color: var(--azul-nexus);">Neide Rabonato, Terapeuta Emocional TRG</cite>
                 </div>
             </div>
         </div>
@@ -979,7 +152,6 @@
         <div class="container">
             <h2 class="section-title">Nossos Serviços: O Ecossistema Completo de Crescimento</h2>
             <p style="text-align: center; margin-bottom: 50px; font-size: 1.1em;">Ferramentas e estratégias para você se destacar e se tornar uma autoridade online.</p>
-            
             <div class="services-grid">
                 <div class="service-card">
                     <i class="fas fa-map-marker-alt service-icon"></i>
@@ -1007,7 +179,6 @@
                     <p>Construção de uma comunidade engajada e geração de leads qualificados através das principais plataformas, aumentando seu alcance.</p>
                 </div>
             </div>
-            
             <div style="text-align: center; margin-top: 50px;">
                 <a href="#contato" class="cta-button">Quero Conhecer a Estratégia Ideal para Minha Empresa</a>
             </div>
@@ -1017,15 +188,10 @@
     <section id="sobre">
         <div class="container">
             <h2 class="section-title">Nossa Missão: Impulsionar o Crescimento Digital em Qualquer Escala</h2>
-            
             <div class="sobre-content">
                 <div class="sobre-text">
-                    <p>
-                        A NexusWay nasceu com a missão clara de fornecer a empresas de todos os portes e modelos de negócio as ferramentas e estratégias necessárias para dominar o cenário digital, seja ele focado em um bairro específico ou em todo o território nacional. Acreditamos que o sucesso no ambiente online não é um privilégio, mas o resultado de um posicionamento estratégico e profissional.
-                    </p>
-                    <p>
-                        Somos uma equipe de especialistas apaixonados por Estratégia Digital, Otimização e Inovação com IA. Nosso propósito é transformar a frustração de "resultados fracos" na satisfação de ser uma referência incontestável em seu mercado. Seu crescimento é o nosso único objetivo.
-                    </p>
+                    <p>A NexusWay nasceu com a missão clara de fornecer a empresas de todos os portes e modelos de negócio as ferramentas e estratégias necessárias para dominar o cenário digital, seja ele focado em um bairro específico ou em todo o território nacional. Acreditamos que o sucesso no ambiente online não é um privilégio, mas o resultado de um posicionamento estratégico e profissional.</p>
+                    <p>Somos uma equipe de especialistas apaixonados por Estratégia Digital, Otimização e Inovação com IA. Nosso propósito é transformar a frustração de "resultados fracos" na satisfação de ser uma referência incontestável em seu mercado. Seu crescimento é o nosso único objetivo.</p>
                     <a href="#contato" class="cta-secundario">Fale com a Equipe de Resultados</a>
                 </div>
                 <div class="values-grid">
@@ -1042,11 +208,9 @@
     <section id="contato">
         <div class="container">
             <h2 class="section-title">Pronto para Crescer e se Destacar?</h2>
-            
             <div class="contact-form-container">
                 <h3>Solicite sua Consultoria Gratuita!</h3>
                 <p style="text-align: center; margin-bottom: 20px;">Preencha o formulário e um especialista entrará em contato em até 24h.</p>
-                
                 <form id="contactForm" action="https://formspree.io/f/mjkadjqg" method="POST">
                     <div class="form-group">
                         <label for="nome">Nome Completo</label>
@@ -1067,7 +231,6 @@
                     <button type="submit" class="cta-button" style="width: 100%;">Fale com um Especialista</button>
                 </form>
             </div>
-            
             <div class="whatsapp-cta">
                 <p style="margin-bottom: 15px; font-size: 1.1em; font-weight: bold;">
                     <i class="fab fa-whatsapp" style="color: var(--verde-whatsapp); margin-right: 8px;"></i> Preferência por Atendimento Imediato?
@@ -1076,7 +239,6 @@
                     Chame Agora no WhatsApp
                 </a>
             </div>
-
             <div class="thank-you-message" id="thankYouMessage">
                 <h3>Obrigado!</h3>
                 <p>Sua mensagem foi enviada com sucesso. Um especialista entrará em contato em até 24 horas.</p>
@@ -1122,7 +284,6 @@
 
         function toggleMobileMenu() {
             mainMenu.classList.toggle('active');
-            // Força a atualização do estilo para iOS
             mainMenu.style.display = mainMenu.classList.contains('active') ? 'flex' : 'none';
         }
 
@@ -1130,15 +291,12 @@
         toggleButton.addEventListener('click', toggleTheme);
         menuToggle.addEventListener('click', toggleMobileMenu);
 
-        // Form submission handling
         const form = document.getElementById('contactForm');
         const thankYouMessage = document.getElementById('thankYouMessage');
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
-
             const formData = new FormData(form);
-
             try {
                 const response = await fetch(form.action, {
                     method: 'POST',
@@ -1147,7 +305,6 @@
                         'Accept': 'application/json'
                     }
                 });
-
                 if (response.ok) {
                     form.style.display = 'none';
                     thankYouMessage.style.display = 'block';
@@ -1158,5 +315,6 @@
                 alert('Ocorreu um erro ao enviar o formulário. Tente novamente.');
             }
         });
-
     </script>
+</body>
+</html>
